@@ -1,0 +1,16 @@
+<ul>
+    {% for category in categories%} 
+    <li><a href="#">{{category.title}}</a></li>
+    {% endfor %}
+</ul>
+
+{% for arti in articles %}
+    <h3>{{arti.title}}</h3>
+    <p>
+        <span style='color:blueviolet;font-weight:bold'>
+        {{arti.date}} | {{arti.category}}
+        </span>
+        <img src="{{arti.image.url}}" width="400px">
+    </p>
+    <p>{{arti.description}}</p>
+{% endfor %}
