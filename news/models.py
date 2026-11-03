@@ -28,3 +28,23 @@ class Article(models.Model):
         verbose_name_plural = 'Посты'
         verbose_name = 'пост'
         ordering = ['-id']
+
+
+class About(models.Model):
+    title1 = models.CharField(max_length=100)
+    title2 = models.CharField(
+        max_length=100, blank=True, null=True
+    )
+    desc1 = models.TextField()
+    desc2 = models.TextField(blank=True, null=True)
+    img1 = models.ImageField(upload_to='about/')
+    img2 = models.ImageField(
+        upload_to='about/', blank=True, null=True
+    )
+
+    class Meta:
+        verbose_name_plural = 'Блок: О нас'
+        verbose_name = 'о нас'
+
+    def __str__(self):
+        return self.title1

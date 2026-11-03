@@ -9,9 +9,13 @@
 
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
       <li><a href="{% url 'homepage' %}" class="nav-link">Главная</a></li>
+      <li><a href="{% url 'about' %}" class="nav-link">О нас</a></li>
+      <li><a href="{% url 'contact' %}" class="nav-link">Контакты</a></li>
       {% for category in categories%}  
           <li>
-            <a href="{% url 'category_news' category.id %}" class="nav-link px-2">{{category.title}}</a>
+            <a href="{% url 'category_news' category.id %}" class="nav-link px-2">
+              {{category.title}}
+            </a>
           </li>
       {% endfor %} 
     </ul>

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto"> 
+        <h1 class="fw-light">{{about.title1}}</h1>
+        {% if about.title2 %}
+            <h3 class="fw-light">{{about.title2}}</h3>
+        {% endif %}
+        <p class="lead text-body-secondary">{{about.desc1}}</p>
+        {% if about.desc2 %}
+        <p>{{about.desc2}}</p>
+        {% endif %}
+      </div>
+    </div>
+    <img src="{{ about.img1.url }}" width="50%">
+    {% if about.img2 %}
+        <img src="{{ about.img2.url }}" width="50%">
+    {% endif %}
+  </section>
+{% endblock content %}
