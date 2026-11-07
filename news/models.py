@@ -48,3 +48,45 @@ class About(models.Model):
 
     def __str__(self):
         return self.title1
+
+
+class Contact(models.Model):
+    time = models.CharField(max_length=20, verbose_name='Время работы от и до')
+    address = models.CharField(max_length=120, verbose_name='Адрес №1')
+    address = models.CharField(
+        verbose_name='Адрес №1', 
+        max_length=120, 
+        null=True, 
+        blank=True
+    )
+    map = models.TextField(verbose_name="Карта")
+    phone = models.CharField(max_length=17, verbose_name='Номер телефона №1')
+    phone2 = models.CharField(
+        verbose_name='Номер телефона №2',
+        null=True, blank=True, 
+        max_length=17
+    ) 
+    tg = models.CharField(max_length=50, verbose_name='Телеграм')
+
+    def __str__(self):
+        return 'Страница Контакты'
+
+    class Meta:
+        verbose_name_plural = "Блок Контакты"
+        verbose_name = "контакт"
+
+
+class ContactForm(models.Model):
+    full_name = models.CharField(max_length=150)
+    email = models.EmailField()
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.full_name
+
+    class Meta:
+        verbose_name_plural = "Сообщение обратной связи"
+        verbose_name = "cообщение обратной связи"
+        ordering = ['-id']
+ 

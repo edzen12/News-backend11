@@ -1,5 +1,24 @@
 {% extends "base.html" %}
-
 {% block content %}
-<h1>Контакты</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <p>{{contact.time}}</p>
+            <p>{{contact.address}}</p>
+            <p>{{contact.map|safe}}</p>
+            <p><a href="tel:{{contact.phone}}">{{contact.phone}}</a></p>
+            <p><a href="{{contact.tg}}">Telegram</a></p> 
+        </div>
+        <div class="col-lg-6">
+            <form method='POST' action='{%  url "contact" %}'>
+                {% csrf_token %}
+                <h2>Оставьте заявку</h2>
+                <input name='full_name' type="text" class="form-control mt-3" placeholder="ФИО" required>
+                <input name='email' type="text" class="form-control mt-3" placeholder="email" required>
+                <textarea name='message' class="form-control mt-3" placeholder="Текст" required></textarea>
+                <button class="btn btn-primary mt-2" type="submit">Отправить</button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock content %}
