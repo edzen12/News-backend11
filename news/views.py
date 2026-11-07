@@ -57,3 +57,14 @@ def category_news(request, category_id):
         'current_category':category,
     }
     return render(request, 'pages/category.html', context) 
+
+
+
+def article_detail(request, article_id):
+    article = get_object_or_404(Article, id=article_id)
+    categories = Category.objects.all()
+    context = {
+        'article':article,
+        'categories':categories,
+    }
+    return render(request, 'pages/article_detail.html', context)

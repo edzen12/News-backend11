@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- content  -->
+    <div class="container">
+        <img src="{{article.image.url}}" width="60%" class="img-thumbnail" alt="">
+        <h1>Hello PY</h1>
+        <h2>
+            {{article.title}} | <span style="color: blue;">{{article.date}}</span>
+        </h2> 
+        <p>{{article.description}}</p>
+    </div>
+
+{% endblock content %}
