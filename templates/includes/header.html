@@ -19,8 +19,8 @@
             {% endfor %} 
         </ul>
 
-        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-          <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+        <form action='{% url "search_news" %}' method='GET' class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+          <input name='q' type="search" class="form-control" placeholder="Поиск...">
         </form>
 
         <div class="text-end">

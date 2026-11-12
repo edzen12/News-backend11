@@ -2,13 +2,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from news.views import (homepage, category_news, about, 
+from news.views import (homepage, category_news, about, search_news,
                         contact, contact_success,article_detail)
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', homepage, name='homepage'),
+    path('search', search_news, name='search_news'),
     path('category/<int:category_id>/', category_news, name='category_news'), 
     path('post/<int:article_id>/', article_detail, name='article_detail'), 
     path('about/', about, name='about'),

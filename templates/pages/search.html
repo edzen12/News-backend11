@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <h1>По запросу: {{ query }}</h1>
+        {% if query %}
+            <div class="mt-4">
+                <h4 class="mt-3">Категории</h4>
+                {% for cat in found_categories %}
+                    <a href="{% url "category_news" cat.id %}" class="btn btn-primary">
+                        {{ cat.title }}
+                    </a>
+                {% empty %}
+                    <p>Категории не найдены</p>
+                {% endfor %}
+                <hr>
+                <h4 class="mt-4 mb-3">Новости</h4>
+                <div class="row row-cols-1 row-cols-md-3 g-3">
+                    {% for arti in articles %}
+                        <div class="col">
+                            <div class="card h-100 shadow-sm">
+                                <a href="{% url 'article_detail' arti.id %}">
+                                    {% if arti.image %}
+                                    <img src="{{ arti.image.url }}" class="card-img-top" height="250">
+                                    {% endif %}
+                                    <div class="card-body">
+                                        <h5>{{ arti.title }}</h5>
+                                        <p>{{ arti.description|truncatewords:15 }}</p>
+                                        <small>{{ arti.category }}</small>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <p>Новости не найдены.</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>Введите запрос в поисковую строку.</p>
+            {% endif %}
+        </div>
+    {% endblock content %}

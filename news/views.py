@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_http_methods
+from django.db.models import Q
 from news.models import Article, Category, About, Contact, ContactForm
 
 
@@ -68,3 +69,27 @@ def article_detail(request, article_id):
         'categories':categories,
     }
     return render(request, 'pages/article_detail.html', context)
+
+
+def search_news(request):
+    query = request.GET.get('q', '').strip()
+    articles = Article.objects.none()
+    found_categories = Category.objects.none()
+    if query:
+        articles = Article.objects.filter(
+            Q(title__icontains=query) |
+            Q(description__icontains=query) |
+            Q(category__title__icontains=query)
+        ).distinct()
+        found_categories = Category.objects.filter(
+            Q(title__icontains=query) |
+            Q(description__icontains=query)
+        )
+    categories = Category.objects.all()
+    context = {
+        'categories':categories,
+        'articles':articles,
+        'found_categories':found_categories,
+        'query':query,
+    }
+    return render(request, 'pages/search.html', context)
