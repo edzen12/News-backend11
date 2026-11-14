@@ -1,6 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_http_methods
 from django.db.models import Q
+from django.contrib.auth import get_user_model, login, logout
+from django.contrib.auth.views import redirect_to_login
+from django.urls import reverse
+
+from news.forms import RegistrationForm, CommentForm
 from news.models import Article, Category, About, Contact, ContactForm
 
 
@@ -93,3 +98,26 @@ def search_news(request):
         'query':query,
     }
     return render(request, 'pages/search.html', context)
+
+
+@require_http_methods(['GET', 'POST'])
+def register(request):
+    if request.user.is_authenticated:
+        return redirect('homepage')
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password1']
+            User = get_user_model()
+            user = User.objects.create_user(
+                username=email,
+                email=email,
+                password=password
+            )
+            login(request, user)
+            return redirect('homepage')
+    else:
+        form = RegistrationForm()
+    context = {'form':form}
+    return render(request, 'pages/register.html', context)
